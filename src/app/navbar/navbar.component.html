@@ -1,11 +1,54 @@
-<mat-toolbar color="primary" class="navbar">
-  <span class="app-title">Loanify App</span>
-  <span class="spacer"></span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
+  <a class="navbar-brand fw-semibold" href="#">Loanify App</a>
 
-  <a mat-button routerLink="dashboard">Dashboard</a>
-  <a mat-button>Customers</a>
-  <a mat-button>Loans</a>
-  <a mat-button>Reports</a>
-  <a mat-button >EMI</a>
-</mat-toolbar>
+  <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      (click)="toggleNavbar()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  <div class="collapse navbar-collapse" id="loanNavbar">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+      <li class="nav-item">
+        <a class="nav-link"
+           routerLink="/dashboard"
+           routerLinkActive="active"
+           >
+          Dashboard
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/customer" routerLinkActive="active">
+          Customers
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/loans" routerLinkActive="active">
+          Loans
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/reports" routerLinkActive="active">
+          Reports
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/emi" routerLinkActive="active">
+          EMI
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
 <router-outlet></router-outlet>

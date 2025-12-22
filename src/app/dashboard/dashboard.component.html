@@ -1,1 +1,121 @@
-<p>dashboard works!</p>
+<div class="container mt-4">
+  <div class="row g-3">
+    <div class="col-md-3">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Total Loans</h5>
+          <p class="card-text display-6">{{ loans.length }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Active Loan</h5>
+          <p class="card-text display-6">{{ pendingLoans }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-secondary mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Approved Loan</h5>
+          <p class="card-text display-6">{{ approvedLoans }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Closed Loan</h5>
+          <p class="card-text display-6">{{ closedLoans }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-danger mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Rejected Loan</h5>
+          <p class="card-text display-6">{{ rejectedLoans }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-4">
+  <div class="col-12">
+    <!-- <button class="btn btn-outline-primary" (click)="filterByStatus('Pending')">
+      Pending
+    </button>
+    <button class="btn btn-outline-primary" (click)="filterByStatus('Closed')">
+      Closed
+    </button>
+    <button class="btn btn-outline-primary" (click)="filterByStatus('Rejected')">
+      Rejected
+    </button>
+    <button class="btn btn-outline-primary" (click)="filterByStatus('Approved')">
+      Approved
+    </button> -->
+    
+<div class="row mb-3">
+  <div class="col-md-4">
+    <select class="form-select" [(ngModel)]="filterStatus" (change)="filterByStatus(filterStatus)">
+      <option value="All">All</option>
+      <option value="Pending">Pending</option>
+      <option value="Approved">Approved</option>
+      <option value="Closed">Closed</option>
+      <option value="Rejected">Rejected</option>
+    </select>
+  </div>
+</div>
+    <div class="card">
+      <div class="card-header bg-primary text-white fw-bold text-center">
+        List of Recent Loans
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-striped mb-0">
+            <thead class="table-light">
+              <tr>
+                <th>ID</th>
+                <th>Customer Name</th>
+                <th>Amount</th>
+                <th>EMI</th>
+                <th>Status</th>
+                <th>Created-Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let loan of filterLoans">
+                <td>{{ loan.id }}</td>
+                <td>{{ loan.customerName }}</td>
+                <td>{{ loan.amount }}</td>
+                <td>{{ loan.emi }}</td>
+                <td>
+                  <span
+                    class="badge"
+                    [ngClass]="{
+                      'bg-success': loan.status === 'Approved',
+                      'bg-warning': loan.status === 'Pending',
+                      'bg-danger': loan.status === 'Rejected',
+                      'bg-secondary': loan.status === 'Closed'
+                    }"
+                  >
+                    {{ loan.status }}
+                  </span>
+                </td>
+
+                <td>
+                  {{ loan.createdDate | date }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
