@@ -15,12 +15,15 @@ export interface Loan {
 })
 export class DashboardServiceService {
    private loans: Loan[] = [
-    { id: 'LN001', customerName: 'John Doe', amount: 50000, emi: 2000, status: 'Approved',createdDate:new Date('2024-06-12') },
-    { id: 'LN002', customerName: 'Jane Smith', amount: 75000, emi: 3000, status: 'Pending',createdDate:new Date('2024-08-08') },
-    { id: 'LN003', customerName: 'Mark Lee', amount: 60000, emi: 2500, status: 'Approved',createdDate:new Date('2024-05-13') },
-    { id: 'LN004', customerName: 'Nikita', amount: 60000, emi: 2500, status: 'Closed',createdDate:new Date('2025-06-18') },
-    { id: 'LN005', customerName: 'Janavi', amount: 60000, emi: 2500, status: 'Rejected',createdDate:new Date('2025-06-17') },
-    { id: 'LN006', customerName: 'Ram', amount: 60000, emi: 2500, status: 'Rejected',createdDate:new Date('2024-06-12') }
+    { id: 'LN001', customerName: 'John Doe', amount: 50000, emi: 2000, status: 'Approved',createdDate:new Date('2025-08-08') },
+    { id: 'LN002', customerName: 'Jane Smith', amount: 75000, emi: 3000, status: 'Pending',createdDate:new Date('2025-08-08') },
+    { id: 'LN003', customerName: 'Mark Lee', amount: 70000, emi: 2500, status: 'Approved',createdDate:new Date('2025-08-08') },
+    { id: 'LN004', customerName: 'Nikita', amount: 20000, emi: 2500, status: 'Closed',createdDate:new Date('2025-08-08') },
+    { id: 'LN005', customerName: 'Janavi', amount: 10000, emi: 2500, status: 'Rejected',createdDate:new Date('2025-08-08') },
+    { id: 'LN006', customerName: 'Kamal', amount: 60000, emi: 2500, status: 'Approved',createdDate:new Date('2025-08-08') },
+    { id: 'LN007', customerName: 'Komal', amount: 60000, emi: 2500, status: 'Approved',createdDate:new Date('2025-08-08') },
+    { id: 'LN008', customerName: 'Nilkamal', amount: 60000, emi: 2500, status: 'Approved',createdDate:new Date('2025-08-08') },
+    
   ];
 
   constructor() { }
@@ -41,9 +44,12 @@ export class DashboardServiceService {
   getRejectedLoans():number{
     return this.loans.filter(loan=>loan.status==='Rejected').length;
   }
-  getRecentLoans(limit:number=5){
-    return [...this.loans].sort((a,b)=>new Date(b.createdDate).getTime()-new Date(a.createdDate).getTime()).slice(0,limit)
-  }
+  getRecentLoans(limit: number=20) {
+  return [...this.loans]
+    .sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())
+    .slice(0, limit);
+}
+
   // getFilterByStatus(status:string){
   //   return this.loans.filter(loan=>loan.status===status)
   // }

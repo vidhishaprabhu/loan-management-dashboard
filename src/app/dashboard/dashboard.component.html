@@ -3,7 +3,7 @@
     <div class="col-md-3">
       <div class="card text-white bg-primary mb-3">
         <div class="card-body">
-          <h5 class="card-title">Total Loans</h5>
+          <h5 class="card-title"><span><i class="fas fa-money-bill"></i></span> Total Loans</h5>
           <p class="card-text display-6">{{ loans.length }}</p>
         </div>
       </div>
@@ -12,7 +12,7 @@
     <div class="col-md-3">
       <div class="card text-white bg-success mb-3">
         <div class="card-body">
-          <h5 class="card-title">Active Loan</h5>
+          <h5 class="card-title"><span><i class="fa-solid fa-chart-line"></i></span>  Active Loan</h5>
           <p class="card-text display-6">{{ pendingLoans }}</p>
         </div>
       </div>
@@ -21,7 +21,7 @@
     <div class="col-md-3">
       <div class="card text-white bg-secondary mb-3">
         <div class="card-body">
-          <h5 class="card-title">Approved Loan</h5>
+          <h5 class="card-title"><span><i class="fas fa-check-circle"></i></span>Approved Loan</h5>
           <p class="card-text display-6">{{ approvedLoans }}</p>
         </div>
       </div>
@@ -29,7 +29,7 @@
     <div class="col-md-3">
       <div class="card text-white bg-success mb-3">
         <div class="card-body">
-          <h5 class="card-title">Closed Loan</h5>
+          <h5 class="card-title"><span><i class="fas fa-lock"></i></span> Closed Loan</h5>
           <p class="card-text display-6">{{ closedLoans }}</p>
         </div>
       </div>
@@ -38,7 +38,7 @@
     <div class="col-md-3">
       <div class="card text-white bg-danger mb-3">
         <div class="card-body">
-          <h5 class="card-title">Rejected Loan</h5>
+          <h5 class="card-title"><span><i class="fas fa-ban"></i></span>  Rejected Loan</h5>
           <p class="card-text display-6">{{ rejectedLoans }}</p>
         </div>
       </div>
@@ -47,30 +47,46 @@
 </div>
 <div class="row mt-4">
   <div class="col-12">
-    <!-- <button class="btn btn-outline-primary" (click)="filterByStatus('Pending')">
-      Pending
-    </button>
-    <button class="btn btn-outline-primary" (click)="filterByStatus('Closed')">
-      Closed
-    </button>
-    <button class="btn btn-outline-primary" (click)="filterByStatus('Rejected')">
-      Rejected
-    </button>
-    <button class="btn btn-outline-primary" (click)="filterByStatus('Approved')">
-      Approved
-    </button> -->
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <select
+          class="form-select"
+          [(ngModel)]="filterStatus"
+          (change)="filterByStatus(filterStatus)"
+        >
+          <option value="All">All</option>
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Closed">Closed</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            class="form-control"
+            placeholder="Search By Customer Name, Loan Id, Amount, EMI, Status"
+          />
+          <button class="btn btn-primary" (click)="filterBySearch()">
+            Search
+          </button>
+          
+        </div>
+        
+      </div>
+    </div>
     
-<div class="row mb-3">
-  <div class="col-md-4">
-    <select class="form-select" [(ngModel)]="filterStatus" (change)="filterByStatus(filterStatus)">
-      <option value="All">All</option>
-      <option value="Pending">Pending</option>
-      <option value="Approved">Approved</option>
-      <option value="Closed">Closed</option>
-      <option value="Rejected">Rejected</option>
-    </select>
-  </div>
+    <div class="d-flex justify-content-end mb-3">
+  <button class="btn btn-success me-2 shadow-sm">
+    <i class="fas fa-file-excel me-1"></i> Export to Excel
+  </button>
+  <button class="btn btn-danger shadow-sm">
+    <i class="fas fa-file-pdf me-1"></i> Export to PDF
+  </button>
 </div>
+
     <div class="card">
       <div class="card-header bg-primary text-white fw-bold text-center">
         List of Recent Loans
@@ -80,16 +96,60 @@
           <table class="table table-striped mb-0">
             <thead class="table-light">
               <tr>
-                <th>ID</th>
-                <th>Customer Name</th>
-                <th>Amount</th>
-                <th>EMI</th>
-                <th>Status</th>
-                <th>Created-Date</th>
+                <th>
+                  Loan ID
+                </th>
+                <th>
+                  Customer Name
+                </th>
+                <th (click)="sortByAmount()" style="cursor: pointer">
+                  Amount
+                  <i
+                    class="ms-1"
+                    [ngClass]="
+                      sortDirectionAmount === 'asc'
+                        ? 'fa-solid fa-arrow-up'
+                        : 'fa-solid fa-arrow-down'
+                    "
+                  ></i>
+                </th>
+                <th (click)="sortByEmi()" style="cursor: pointer;">
+                  EMI
+                  <i
+                    class="ms-1"
+                    [ngClass]="
+                      sortDirectionEmi === 'asc'
+                        ? 'fa-solid fa-arrow-up'
+                        : 'fa-solid fa-arrow-down'
+                    "
+                  ></i>
+                </th>
+                <th>
+                  Status
+                  <!-- <i
+                    class="ms-1"
+                    [ngClass]="
+                      sortDirection === 'asc'
+                        ? 'fa-solid fa-arrow-up'
+                        : 'fa-solid fa-arrow-down'
+                    "
+                  ></i> -->
+                </th>
+                <th>
+                  Created-Date
+                  <!-- <i
+                    class="ms-1"
+                    [ngClass]="
+                      sortDirection === 'asc'
+                        ? 'fa-solid fa-arrow-up'
+                        : 'fa-solid fa-arrow-down'
+                    "
+                  ></i> -->
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let loan of filterLoans">
+              <tr *ngFor="let loan of paginationLoan">
                 <td>{{ loan.id }}</td>
                 <td>{{ loan.customerName }}</td>
                 <td>{{ loan.amount }}</td>
@@ -107,13 +167,36 @@
                     {{ loan.status }}
                   </span>
                 </td>
-
-                <td>
-                  {{ loan.createdDate | date }}
-                </td>
+                <td>{{ loan.createdDate | date }}</td>
               </tr>
             </tbody>
           </table>
+          <div
+            *ngIf="filterLoans.length === 0"
+            class="alert alert-info text-center"
+          >
+            No loans found.
+          </div>
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button
+            class="btn btn-secondary me-2"
+            (click)="changePage(currentPage - 1)"
+            [disabled]="currentPage === 1"
+          >
+            Previous
+          </button>
+          <span class="me-3 align-self-center">
+            Page {{ currentPage }} of {{ totalPage }}
+          </span>
+
+          <button
+            class="btn btn-secondary"
+            (click)="changePage(currentPage + 1)"
+            [disabled]="currentPage === totalPage"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
