@@ -1,4 +1,4 @@
-<h4 class="text-center fw-bold">Loan Details</h4>
+<h4 class="text-center fw-bold mb-4 mt-4">Loan Details</h4>
 
 <table class="table table-bordered">
   <thead>
@@ -17,7 +17,19 @@
       <td>{{ loan.customerName }}</td>
       <td>{{ loan.amount }}</td>
       <td>{{ loan.emi }}</td>
-      <td>{{ loan.status }}</td>
+      <td>
+                  <span
+                    class="badge"
+                    [ngClass]="{
+                      'bg-success': loan.status === 'Approved',
+                      'bg-warning': loan.status === 'Pending',
+                      'bg-danger': loan.status === 'Rejected',
+                      'bg-secondary': loan.status === 'Closed'
+                    }"
+                  >
+                    {{ loan.status }}
+                  </span>
+                </td>
     </tr>
   </tbody>
 </table>

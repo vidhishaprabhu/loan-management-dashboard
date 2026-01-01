@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DashboardServiceService, Loan } from '../dashboard-service.service';
 import { Customer, CustomerService } from '../customer.service';
-import { NgFor, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-customer-details',
-  imports: [NgFor],
+  imports: [NgFor,NgClass],
   templateUrl: './customer-details.component.html',
   styleUrl: './customer-details.component.css'
 })
