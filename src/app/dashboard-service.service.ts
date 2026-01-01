@@ -48,9 +48,5 @@ export class DashboardServiceService {
   return [...this.loans]
     .sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())
     .slice(0, limit);
-}
-
-  // getFilterByStatus(status:string){
-  //   return this.loans.filter(loan=>loan.status===status)
-  // }
+  }
 }

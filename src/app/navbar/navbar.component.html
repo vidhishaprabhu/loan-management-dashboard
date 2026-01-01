@@ -16,8 +16,9 @@
 
       <li class="nav-item">
         <a class="nav-link"
-           routerLink="/dashboard"
+           routerLink="/"
            routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: true }"
            >
           Dashboard
         </a>

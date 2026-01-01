@@ -2,10 +2,13 @@ import { Component } from '@angular/core';
 import { DashboardServiceService, Loan } from '../dashboard-service.service';
 import { CommonModule, NgClass, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { CardModule } from 'primeng/card';
 @Component({
   selector: 'app-dashboard',
-  imports: [NgFor, NgClass, CommonModule, FormsModule],
+  standalone: true, 
+  imports: [NgFor, NgClass, CommonModule, FormsModule,ButtonModule,InputTextModule,CardModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })

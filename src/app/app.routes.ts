@@ -7,7 +7,7 @@ import { EmiComponent } from './emi/emi.component';
 
 export const routes: Routes = [
   {
-    path:'dashboard',component:DashboardComponent
+    path:'',component:DashboardComponent
   },
   {
     path:'customer',component:CustomerComponent

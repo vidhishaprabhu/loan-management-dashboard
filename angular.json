@@ -85,7 +85,12 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/primeflex/primeflex.css",
+  "node_modules/primeicons/primeicons.css",
+  "node_modules/primeng/resources/primeng.min.css",
+  "node_modules/@primeng/themes/lara-light-indigo/theme.css"
+  
             ],
             "scripts": []
           }
