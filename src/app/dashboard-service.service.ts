@@ -30,6 +30,10 @@ export class DashboardServiceService {
   getLoans():Loan[]{
     return this.loans;
   }
+  getLoansByCustomerId(customerId: string): Loan[] {
+  return this.loans.filter(loan => loan.id === customerId);
+}
+
   getPendingLoans():number{
     return this.loans.filter(
       loan=>loan.status==='Pending'

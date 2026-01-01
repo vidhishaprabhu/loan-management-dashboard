@@ -1,0 +1,26 @@
+<h4 class="text-center fw-bold">Loan Details</h4>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Loan ID</th>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>EMI</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let loan of loans">
+      <td>{{ loan.id }}</td>
+      <td>{{ loan.customerName }}</td>
+      <td>{{ loan.amount }}</td>
+      <td>{{ loan.emi }}</td>
+      <td>{{ loan.status }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
