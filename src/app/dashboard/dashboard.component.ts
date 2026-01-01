@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
+import { ExcelService } from '../excel.service';
+import { PdfService } from '../pdf.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true, 
@@ -29,7 +31,10 @@ export class DashboardComponent {
   sortDirectionAmount = '';
   sortDirectionEmi='';
   
-  constructor(private dashboardService: DashboardServiceService) {}
+  constructor(private dashboardService: DashboardServiceService,
+    private excelService:ExcelService,
+    private pdfService:PdfService
+  ) {}
 
   ngOnInit(): void {
     this.loans = this.dashboardService.getLoans();
@@ -107,5 +112,10 @@ export class DashboardComponent {
     this.currentPage = 1;
     this.updatePagination();
   }
-  
+  exportToExcel() {
+    this.excelService.exportLoansToExcel(this.loans, 'Loan_Report');
+  }
+  exportToPDF(){
+    this.pdfService.exportLoansToPDF(this.loans,'Loan_Report');
+  }
 }
