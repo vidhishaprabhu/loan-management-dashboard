@@ -21,6 +21,7 @@ export class CustomerComponent {
   ngOnInit():void{
     this.customers=this.customerService.getCustomers();
     // this.customerId=this.customerService.getCustomerById(this.customerId);
+    
   }
   viewCustomerDetails(customerId:string):void{
     this.router.navigate(['/customer',customerId]);

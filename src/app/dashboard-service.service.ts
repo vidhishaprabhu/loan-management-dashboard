@@ -16,6 +16,7 @@ export interface Loan {
 export class DashboardServiceService {
    private loans: Loan[] = [
     { id: 'LN001', customerName: 'John Doe', amount: 50000, emi: 2000, status: 'Approved',createdDate:new Date('2025-08-08') },
+    { id: 'LN001', customerName: 'John Doe', amount: 80000, emi: 2000, status: 'Approved',createdDate:new Date('2025-08-09') },
     { id: 'LN002', customerName: 'Jane Smith', amount: 75000, emi: 3000, status: 'Pending',createdDate:new Date('2025-08-08') },
     { id: 'LN003', customerName: 'Mark Lee', amount: 70000, emi: 2500, status: 'Approved',createdDate:new Date('2025-08-08') },
     { id: 'LN004', customerName: 'Nikita', amount: 20000, emi: 2500, status: 'Closed',createdDate:new Date('2025-08-08') },
@@ -64,5 +65,8 @@ export class DashboardServiceService {
   }
   getRejectedByCustomerId(customerId:string):Loan[]{
     return this.loans.filter(loan=>loan.id===customerId && loan.status==='Rejected');
+  }
+  getOutstandingByCustomerId(customerId:string):number{
+    return this.loans.filter(loan=>loan.id===customerId && loan.amount>0).reduce((sum,loan)=>sum+loan.amount,0);
   }
 }

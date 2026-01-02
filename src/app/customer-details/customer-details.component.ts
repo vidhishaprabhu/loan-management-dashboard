@@ -19,6 +19,7 @@ export class CustomerDetailsComponent {
   activeCount:number=0;
   closedCount:number=0;
   rejectedCount:number=0;
+  outstanding:number=0;
   constructor(
   private route:ActivatedRoute,
   private customerService:CustomerService,
@@ -35,6 +36,7 @@ export class CustomerDetailsComponent {
     this.activeCount=this.dashboardService.getActiveByCustomerId(customerId).length;
     this.closedCount=this.dashboardService.getClosedByCustomerId(customerId).length;
     this.rejectedCount=this.dashboardService.getRejectedByCustomerId(customerId).length;
+    this.outstanding=this.dashboardService.getOutstandingByCustomerId(customerId);
     }
   }
    
