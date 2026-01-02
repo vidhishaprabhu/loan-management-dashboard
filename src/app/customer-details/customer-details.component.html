@@ -1,3 +1,47 @@
+<div class="container mt-4">
+  <div class="row g-3">
+    <div class="col-md-3">
+      <div class="card text-white bg-primary mb-3 dashboard-card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span><i class="fas fa-money-bill"></i></span> Total Loans
+          </h5>
+          <p class="card-text display-6">{{count}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-success mb-3 dashboard-card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span><i class="fa-solid fa-chart-line"></i></span> Approved Loans
+          </h5>
+          <p class="card-text display-6">{{activeCount}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-secondary mb-3 dashboard-card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span><i class="fa-solid fa-chart-line"></i></span> Closed Loans
+          </h5>
+          <p class="card-text display-6">{{closedCount}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-danger mb-3 dashboard-card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span><i class="fa-solid fa-chart-line"></i></span> Rejected Loans
+          </h5>
+          <p class="card-text display-6">{{rejectedCount}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <h4 class="text-center fw-bold mb-4 mt-4">Loan Details</h4>
 
 <table class="table table-bordered">
@@ -18,21 +62,18 @@
       <td>{{ loan.amount }}</td>
       <td>{{ loan.emi }}</td>
       <td>
-                  <span
-                    class="badge"
-                    [ngClass]="{
-                      'bg-success': loan.status === 'Approved',
-                      'bg-warning': loan.status === 'Pending',
-                      'bg-danger': loan.status === 'Rejected',
-                      'bg-secondary': loan.status === 'Closed'
-                    }"
-                  >
-                    {{ loan.status }}
-                  </span>
-                </td>
+        <span
+          class="badge"
+          [ngClass]="{
+            'bg-success': loan.status === 'Approved',
+            'bg-warning': loan.status === 'Pending',
+            'bg-danger': loan.status === 'Rejected',
+            'bg-secondary': loan.status === 'Closed'
+          }"
+        >
+          {{ loan.status }}
+        </span>
+      </td>
     </tr>
   </tbody>
 </table>
-
-
-

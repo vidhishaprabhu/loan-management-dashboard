@@ -15,6 +15,10 @@ export class CustomerDetailsComponent {
   customer:Customer[]=[];
   customerId:string='';
   loanId:string='';
+  count:number=0;
+  activeCount:number=0;
+  closedCount:number=0;
+  rejectedCount:number=0;
   constructor(
   private route:ActivatedRoute,
   private customerService:CustomerService,
@@ -27,6 +31,10 @@ export class CustomerDetailsComponent {
     if (customerId) {
     this.customer = this.customerService.getCustomerById(customerId);
     this.loans = this.dashboardService.getLoansByCustomerId(customerId);
+    this.count=this.dashboardService.getCountByCustomerId(customerId).length;
+    this.activeCount=this.dashboardService.getActiveByCustomerId(customerId).length;
+    this.closedCount=this.dashboardService.getClosedByCustomerId(customerId).length;
+    this.rejectedCount=this.dashboardService.getRejectedByCustomerId(customerId).length;
     }
   }
    

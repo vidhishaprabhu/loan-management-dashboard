@@ -53,4 +53,16 @@ export class DashboardServiceService {
     .sort((a, b) => new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime())
     .slice(0, limit);
   }
+  getCountByCustomerId(customerId:string):Loan[]{
+    return this.loans.filter(loan=>loan.id===customerId);
+  }
+  getActiveByCustomerId(customerId:string):Loan[]{
+    return this.loans.filter(loan=>loan.id===customerId && loan.status==='Approved');
+  }
+  getClosedByCustomerId(customerId:string):Loan[]{
+    return this.loans.filter(loan=>loan.id===customerId && loan.status==='Closed');
+  }
+  getRejectedByCustomerId(customerId:string):Loan[]{
+    return this.loans.filter(loan=>loan.id===customerId && loan.status==='Rejected');
+  }
 }

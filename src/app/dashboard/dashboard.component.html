@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="row g-3">
     <div class="col-md-3">
-      <div class="card text-white bg-primary mb-3">
+      <div class="card text-white bg-primary mb-3 dashboard-card">
         <div class="card-body">
           <h5 class="card-title">
             <span><i class="fas fa-money-bill"></i></span> Total Loans
@@ -12,7 +12,7 @@
     </div>
 
     <div class="col-md-3">
-      <div class="card text-white bg-success mb-3">
+      <div class="card text-white bg-success mb-3 dashboard-card">
         <div class="card-body">
           <h5 class="card-title">
             <span><i class="fa-solid fa-chart-line"></i></span> Active Loan
@@ -23,7 +23,7 @@
     </div>
 
     <div class="col-md-3">
-      <div class="card text-white bg-secondary mb-3">
+      <div class="card text-white bg-secondary mb-3 dashboard-card">
         <div class="card-body">
           <h5 class="card-title">
             <span><i class="fas fa-check-circle"></i></span> Approved Loan
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="col-md-3">
-      <div class="card text-white bg-success mb-3">
+      <div class="card text-white bg-success mb-3 dashboard-card">
         <div class="card-body">
           <h5 class="card-title">
             <span><i class="fas fa-lock"></i></span> Closed Loan
@@ -44,7 +44,7 @@
     </div>
 
     <div class="col-md-3">
-      <div class="card text-white bg-danger mb-3">
+      <div class="card text-white bg-danger mb-3 dashboard-card">
         <div class="card-body">
           <h5 class="card-title">
             <span><i class="fas fa-ban"></i></span> Rejected Loan
@@ -159,7 +159,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let loan of paginationLoan">
+              <tr *ngFor="let loan of paginationLoan" class="light-row">
                 <td>{{ loan.id }}</td>
                 <td>{{ loan.customerName }}</td>
                 <td>{{ loan.amount }}</td>
