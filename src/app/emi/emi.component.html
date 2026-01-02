@@ -1,1 +1,46 @@
-<p>emi works!</p>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h5 class="text-center">EMI Calculator</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <label class="form-label">Principal Amount (₹)</label>
+          <input
+            type="number"
+            class="form-control"
+             #amount
+  (input)="onPrincipalChange($event)"
+            placeholder="Enter Principle Amount"
+          />
+          <!-- <p>{{principal}}</p> -->
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Annual Interest Rate (%)</label>
+          <input
+            type="number"
+            class="form-control"
+  (input)="onRateChange($event)"
+            placeholder="Enter Annual Interest Rate (%)"
+          />
+          <!-- <p>{{annualRate}}</p> -->
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Tenure (months)</label>
+          <input
+            type="number"
+            class="form-control"
+            #tenureInput
+  (input)="onTenureChange($event)"
+            placeholder="Enter Tenure (months)"
+          />
+          <!-- <p>{{tenure}}</p> -->
+        </div>
+
+        <button class="btn btn-primary mt-4" (click)="calculateEmi()">Calculate EMI</button>
+        <p class="mt-5 text-center text-danger fw-bold fs-4">EMI: ₹{{emi}}</p>
+      </div>
+    </div>
+  </div>
+</div>

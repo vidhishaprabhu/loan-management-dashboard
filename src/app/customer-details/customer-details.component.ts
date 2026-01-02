@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DashboardServiceService, Loan } from '../dashboard-service.service';
 import { Customer, CustomerService } from '../customer.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
+import { ExcelService } from '../excel.service';
+import { PdfService } from '../pdf.service';
 
 @Component({
   selector: 'app-customer-details',
@@ -23,7 +25,9 @@ export class CustomerDetailsComponent {
   constructor(
   private route:ActivatedRoute,
   private customerService:CustomerService,
-  private dashboardService:DashboardServiceService
+  private dashboardService:DashboardServiceService,
+  private excelService:ExcelService,
+  private pdfService:PdfService
   ){
     
   }
