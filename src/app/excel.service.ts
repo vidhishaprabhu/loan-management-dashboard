@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Loan } from './dashboard-service.service';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import { Customer } from './customer.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +28,37 @@ export class ExcelService {
     const workbook: XLSX.WorkBook = {
       Sheets: { 'Loans': worksheet },
       SheetNames: ['Loans']
+    };
+
+    // Write workbook to buffer
+    const excelBuffer: any = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array'
+    });
+
+    // Save as file
+    this.saveAsExcelFile(excelBuffer, fileName);
+  }
+  exportCustomerToExcel(customers: Customer[], fileName: string): void {
+    // Map the loan objects to a format suitable for Excel
+    const exportData = customers.map(customer => ({
+      'Customer ID': customer.id,
+      'Customer Name': customer.name,
+      'Email': customer.email,
+      'Phone': customer.phone,
+      'Address': customer.address,
+      'DOB': customer.dob,
+      'Status': customer.status,
+      'Outstanding Amount': customer.outstandingAmount
+    }));
+
+    // Convert JSON to worksheet
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData);
+
+    // Create workbook
+    const workbook: XLSX.WorkBook = {
+      Sheets: { 'Customers': worksheet },
+      SheetNames: ['Customers']
     };
 
     // Write workbook to buffer

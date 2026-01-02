@@ -33,7 +33,7 @@ export class DashboardServiceService {
   }
   getLoansByCustomerId(customerId: string): Loan[] {
   return this.loans.filter(loan => loan.id === customerId);
-}
+  }
 
   getPendingLoans():number{
     return this.loans.filter(

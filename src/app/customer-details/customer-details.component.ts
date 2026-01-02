@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet} from '@angular/router';
 import { DashboardServiceService, Loan } from '../dashboard-service.service';
 import { Customer, CustomerService } from '../customer.service';
 import { NgClass, NgFor, NgIf } from '@angular/common';
@@ -8,7 +8,7 @@ import { PdfService } from '../pdf.service';
 
 @Component({
   selector: 'app-customer-details',
-  imports: [NgFor,NgClass],
+  imports: [NgFor,NgClass,RouterLink],
   templateUrl: './customer-details.component.html',
   styleUrl: './customer-details.component.css'
 })
@@ -43,5 +43,12 @@ export class CustomerDetailsComponent {
     this.outstanding=this.dashboardService.getOutstandingByCustomerId(customerId);
     }
   }
+  exportToExcel():void{
+    this.excelService.exportLoansToExcel(this.loans,'customer-details');
+  }
+  exportToPDF():void{
+    this.pdfService.exportLoansToPDF(this.loans,'customer-details'); 
+  }
+  
    
   }
