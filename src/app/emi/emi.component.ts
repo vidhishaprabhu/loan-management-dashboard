@@ -33,4 +33,10 @@ onPrincipalChange(event: Event) {
 onTenureChange(event: Event) {
   this.tenure = +(event.target as HTMLInputElement).value;
 }
+reset(){
+  this.principal=0;
+  this.annualRate=0;
+  this.tenure=0;
+  this.emi=0;
+}
 }

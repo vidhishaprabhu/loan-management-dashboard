@@ -79,15 +79,9 @@
             [(ngModel)]="searchTerm"
             placeholder="Search By Customer Name, Loan Id, Amount, EMI, Status"
           />
-
-          <p-button
-            label="Search"
-            icon="pi pi-search"
-            severity="primary"
-            class="mr-2"
-            (click)="filterBySearch()"
-          >
-          </p-button>
+          <button class="btn btn-primary" (click)="filterBySearch()">
+            Search
+          </button>
         </div>
       </div>
     </div>

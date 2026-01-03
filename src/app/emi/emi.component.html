@@ -10,9 +10,8 @@
           <input
             type="number"
             class="form-control"
-             #amount
-  (input)="onPrincipalChange($event)"
             placeholder="Enter Principle Amount"
+            [(ngModel)]="principal"
           />
           <!-- <p>{{principal}}</p> -->
         </div>
@@ -21,7 +20,7 @@
           <input
             type="number"
             class="form-control"
-  (input)="onRateChange($event)"
+            [(ngModel)]="annualRate"
             placeholder="Enter Annual Interest Rate (%)"
           />
           <!-- <p>{{annualRate}}</p> -->
@@ -31,15 +30,23 @@
           <input
             type="number"
             class="form-control"
-            #tenureInput
-  (input)="onTenureChange($event)"
+            [(ngModel)]="tenure"
             placeholder="Enter Tenure (months)"
           />
           <!-- <p>{{tenure}}</p> -->
         </div>
 
-        <button class="btn btn-primary mt-4" (click)="calculateEmi()">Calculate EMI</button>
-        <p class="mt-5 text-center text-danger fw-bold fs-4">EMI: ₹{{emi}}</p>
+        <div class="d-flex justify-content-center gap-3 mt-4">
+          <button class="btn btn-primary w-auto" (click)="calculateEmi()">
+            Calculate EMI
+          </button>
+
+          <button class="btn btn-outline-secondary w-auto" (click)="reset()">
+            Reset
+          </button>
+        </div>
+
+        <p class="mt-5 text-center text-danger fw-bold fs-4">EMI: ₹{{ emi }}</p>
       </div>
     </div>
   </div>
