@@ -192,7 +192,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let schedule of emiSchedule">
+          <tr *ngFor="let schedule of paginatedemischedule">
             <td>{{ schedule.month }}</td>
             <td>{{ schedule.emi }}</td>
             <td>{{ schedule.principalPaid }}</td>
@@ -201,6 +201,26 @@
           </tr>
         </tbody>
       </table>
+      <div class="d-flex justify-content-end mt-3">
+          <button
+            class="btn btn-secondary me-2"
+            (click)="changePage(currentPage - 1)"
+            [disabled]="currentPage === 1"
+          >
+            Previous
+          </button>
+          <span class="me-3 align-self-center">
+            Page {{ currentPage }} of {{ totalPage }}
+          </span>
+
+          <button
+            class="btn btn-secondary"
+            (click)="changePage(currentPage + 1)"
+            [disabled]="currentPage === totalPage"
+          >
+            Next
+          </button>
+        </div>
       <div class="container d-flex justify-content-center">
         <button class="btn btn-primary mt-5 mb-4" (click)="generateSchedule()">
           Generate EMI Schedule

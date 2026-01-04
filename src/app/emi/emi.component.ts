@@ -23,9 +23,13 @@ export class EmiComponent {
   tenure:number=0;
   totalPayment:number=0;
   emiSchedule:any[]=[];
+  currentPage = 1;
+  itemPerPage = 6;
+  totalPage = 0;
+  paginatedemischedule: any[] = [];
   ngOnInit():void{
-    
-
+    this.currentPage = 1;
+    this.updatePagination();
   }
   calculateEmi():void{
     this.emi=this.emiService.calculateEmi(this.principal,this.annualRate,this.tenure);
@@ -55,6 +59,8 @@ totalAmountPayable(){
 generateSchedule(){
   this.emiSchedule=this.emiService.generateEmiSchedule(this.principal,this.annualRate,this.tenure,this.emi);
   console.log(this.principal,this.annualRate,this.tenure,this.emi);
+  this.currentPage = 1;
+  this.updatePagination();
 }
 exportToExcel(){
   this.excelService.exportEmiScheduleToExcel(this.emiSchedule,'emi_schedule');
@@ -62,4 +68,17 @@ exportToExcel(){
 exportToPDF(){
   this.pdfService.exportEmiScheduleToPDF(this.emiSchedule,'emi_schedule');  
 }
+updatePagination() {
+    const startIndex = (this.currentPage - 1) * this.itemPerPage;
+    const endIndex = startIndex + this.itemPerPage;
+
+    this.paginatedemischedule = this.emiSchedule.slice(startIndex, endIndex);
+
+    this.totalPage = Math.ceil(this.emiSchedule.length / this.itemPerPage);
+  }
+
+  changePage(page: number) {
+    this.currentPage = page;
+    this.updatePagination();
+  }
 }
