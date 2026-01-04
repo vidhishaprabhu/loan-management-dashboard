@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { EmiService } from '../emi.service';
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ExcelService } from '../excel.service';
+import { PdfService } from '../pdf.service';
 @Component({
   selector: 'app-emi',
   standalone: true,
@@ -10,7 +12,10 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './emi.component.css'
 })
 export class EmiComponent {
-  constructor(private emiService:EmiService){}
+  constructor(private emiService:EmiService,
+    private excelService:ExcelService,
+    private pdfService:PdfService
+  ){}
 
   emi:number=0;
   principal:number=0;
@@ -50,5 +55,11 @@ totalAmountPayable(){
 generateSchedule(){
   this.emiSchedule=this.emiService.generateEmiSchedule(this.principal,this.annualRate,this.tenure,this.emi);
   console.log(this.principal,this.annualRate,this.tenure,this.emi);
+}
+exportToExcel(){
+  this.excelService.exportEmiScheduleToExcel(this.emiSchedule,'emi_schedule');
+}
+exportToPDF(){
+  this.pdfService.exportEmiScheduleToPDF(this.emiSchedule,'emi_schedule');  
 }
 }

@@ -77,5 +77,35 @@ export class ExcelService {
     saveAs(blob, `${fileName}_${date}.xlsx`);
   }
 
+  exportEmiScheduleToExcel(schedule:any[],fileName:string){
+    const exportData = schedule.map(emi => ({
+      'Month':emi.month,
+      'Opening Balance':emi.openingBalance,
+      'EMI':emi.emi,
+      'Principal Paid':emi.priciplePaid,
+      'Interest Paid':emi.interestPaid,
+      'Closing Balance':emi.closingBalance
+    }));
+
+    // Convert JSON to worksheet
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData);
+
+    // Create workbook
+    const workbook: XLSX.WorkBook = {
+      Sheets: { 'EMI Schedule': worksheet },
+      SheetNames: ['EMI Schedule']
+    };
+
+    // Write workbook to buffer
+    const excelBuffer: any = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array'
+    });
+
+    // Save as file
+    this.saveAsExcelFile(excelBuffer, fileName);
+
+  }
+
 
 }

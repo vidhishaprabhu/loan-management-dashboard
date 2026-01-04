@@ -57,5 +57,27 @@ exportCustomersToPDF(customers: Customer[], fileName: string = 'Customer_Report'
   const date=new Date().getFullYear();
   doc.save(`${fileName}_${date}.pdf`);
 }
+exportEmiScheduleToPDF(emiSchedule: any[], fileName: string) {
+  const doc = new jsPDF();
+
+  autoTable(doc, {
+    head: [['Month', 'Opening Balance', 'EMI', 'Principal Paid', 'Interest Paid', 'Closing Balance']],
+    body: emiSchedule.map(emi => [
+      emi.month,
+      emi.openingBalance,
+      emi.emi,
+      emi.principalPaid,
+      emi.interestPaid,
+      emi.closingBalance
+    ]),
+    startY: 20
+  });
+
+  doc.setFontSize(16);
+  doc.text('Emi Schedule Report', 14, 15);
+
+  const date=new Date().getFullYear();
+  doc.save(`${fileName}_${date}.pdf`);
+}
 
 }
