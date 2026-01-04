@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { EmiService } from '../emi.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-emi',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,NgFor],
   templateUrl: './emi.component.html',
   styleUrl: './emi.component.css'
 })
@@ -16,8 +16,10 @@ export class EmiComponent {
   principal:number=0;
   annualRate:number=0;
   tenure:number=0;
-
+  totalPayment:number=0;
+  emiSchedule:any[]=[];
   ngOnInit():void{
+    
 
   }
   calculateEmi():void{
@@ -38,5 +40,15 @@ reset(){
   this.annualRate=0;
   this.tenure=0;
   this.emi=0;
+}
+resetTotalAmountPayable(){
+  this.totalPayment=0;
+}
+totalAmountPayable(){
+  this.totalPayment = this.emiService.calculateTotalPayment(this.emi,this.tenure);
+}
+generateSchedule(){
+  this.emiSchedule=this.emiService.generateEmiSchedule(this.principal,this.annualRate,this.tenure,this.emi);
+  console.log(this.principal,this.annualRate,this.tenure,this.emi);
 }
 }
