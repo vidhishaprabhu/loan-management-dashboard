@@ -21,7 +21,7 @@ export class PdfService {
       loan.amount,
       loan.emi,
       loan.status,
-      loan.createdDate.toLocaleDateString()
+      loan.emiDate.toLocaleDateString()
     ]),
     startY: 20
   });

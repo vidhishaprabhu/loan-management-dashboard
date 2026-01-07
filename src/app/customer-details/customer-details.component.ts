@@ -49,6 +49,8 @@ export class CustomerDetailsComponent {
   exportToPDF():void{
     this.pdfService.exportLoansToPDF(this.loans,'customer-details'); 
   }
-  
+  getLoanStatuses(loan:Loan){
+    return this.dashboardService.getLoanStatuses(loan);
+  }
    
   }

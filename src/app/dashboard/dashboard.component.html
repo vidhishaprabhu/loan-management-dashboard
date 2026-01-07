@@ -107,7 +107,7 @@
                 <th>Loan/Customer-ID</th>
                 <th>Customer Name</th>
                 <th (click)="sortByAmount()" style="cursor: pointer">
-                  Amount
+                  Loan Amount
                   <i
                     class="ms-1"
                     [ngClass]="
@@ -117,6 +117,7 @@
                     "
                   ></i>
                 </th>
+                <th style="cursor: pointer">Outstanding Amount</th>
                 <th (click)="sortByEmi()" style="cursor: pointer">
                   EMI
                   <i
@@ -140,7 +141,7 @@
                   ></i> -->
                 </th>
                 <th>
-                  Created-Date
+                  EMI-Date
                   <!-- <i
                     class="ms-1"
                     [ngClass]="
@@ -150,6 +151,7 @@
                     "
                   ></i> -->
                 </th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -157,21 +159,35 @@
                 <td>{{ loan.id }}</td>
                 <td>{{ loan.customerName }}</td>
                 <td>{{ loan.amount }}</td>
+                <td>{{ loan.outstandingAmount }}</td>
                 <td>{{ loan.emi }}</td>
                 <td>
                   <span
                     class="badge"
                     [ngClass]="{
-                      'bg-success': loan.status === 'Approved',
-                      'bg-warning': loan.status === 'Pending',
-                      'bg-danger': loan.status === 'Rejected',
-                      'bg-secondary': loan.status === 'Closed'
+                      'bg-primary': getLoanStatuses(loan) === 'Active',
+                      'bg-warning text-dark':
+                        getLoanStatuses(loan) === 'Rejected',
+                      'bg-danger': getLoanStatuses(loan) === 'Overdue',
+                      'bg-secondary': getLoanStatuses(loan) === 'Closed'
                     }"
                   >
-                    {{ loan.status }}
+                    {{ getLoanStatuses(loan) }}
                   </span>
                 </td>
-                <td>{{ loan.createdDate | date }}</td>
+                <td>{{ loan.emiDate | date }}</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-success"
+                    [disabled]="
+                      getLoanStatuses(loan) !== 'Active' &&
+                      getLoanStatuses(loan) !== 'Overdue'
+                    "
+                    (click)="payEmi(loan)"
+                  >
+                    Pay EMI
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -203,6 +219,47 @@
           </button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<div class="card mt-5">
+  <div class="card-header bg-primary text-white fw-bold text-center">
+    EMI Payment History
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>EMI (₹)</th>
+            <th>Outstanding Amount (₹)</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emi of emiHistory">
+            <td>{{ emi.month }}</td>
+            <td>{{ emi.emiAmount }}</td>
+            <td>{{ emi.balance }}</td>
+            <td>{{ emi.date | date }}</td>
+            <td>
+              <span
+                class="badge"
+                [ngClass]="{
+                  'bg-primary': emi.status === 'Active',
+                  'bg-warning text-dark': emi.status === 'Rejected',
+                  'bg-danger': emi.status === 'Overdue',
+                  'bg-secondary': emi.status === 'Closed'
+                }"
+              >
+                {{ emi.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

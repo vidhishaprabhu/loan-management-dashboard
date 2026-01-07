@@ -18,7 +18,7 @@ export class ExcelService {
       'Loan Amount': loan.amount,
       'EMI': loan.emi,
       'Status': loan.status,
-      'Created Date': loan.createdDate.toLocaleDateString()
+      'Created Date': loan.emiDate.toLocaleDateString()
     }));
 
     // Convert JSON to worksheet

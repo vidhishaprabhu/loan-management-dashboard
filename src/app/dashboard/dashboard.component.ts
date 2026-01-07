@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DashboardServiceService, Loan } from '../dashboard-service.service';
+import { DashboardServiceService, EmiHistory, Loan } from '../dashboard-service.service';
 import { CommonModule, NgClass, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -30,6 +30,7 @@ export class DashboardComponent {
   paginationLoan: Loan[] = [];
   sortDirectionAmount = '';
   sortDirectionEmi='';
+  emiHistory:EmiHistory[]=[];
   
   constructor(private dashboardService: DashboardServiceService,
     private excelService:ExcelService,
@@ -117,5 +118,25 @@ export class DashboardComponent {
   }
   exportToPDF(){
     this.pdfService.exportLoansToPDF(this.loans,'Loan_Report');
+  }
+  getLoanStatuses(loan:Loan){
+    return this.dashboardService.getLoanStatuses(loan);
+  }
+  payEmi(loan:Loan){
+    if(loan.outstandingAmount<=0){
+      loan.status==='Closed';
+    }
+    loan.outstandingAmount=loan.outstandingAmount-loan.emi;
+    this.emiHistory.push({
+    month: this.emiHistory.length + 1,
+    emiAmount: loan.emi,
+    balance: loan.outstandingAmount,
+    date: new Date(),
+    status: this.getLoanStatuses(loan)
+  });
+  const nextDate=new Date(loan.emiDate);
+  nextDate.setMonth(nextDate.getMonth()+1);
+  loan.emiDate=nextDate;
+  loan.status=this.getLoanStatuses(loan);
   }
 }

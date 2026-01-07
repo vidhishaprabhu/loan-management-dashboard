@@ -1,4 +1,6 @@
-<button class="btn btn-sm btn-primary mt-3 mx-3" [routerLink]="['/customer']">Back</button>
+<button class="btn btn-sm btn-primary mt-3 mx-3" [routerLink]="['/customer']">
+  Back
+</button>
 <div class="container mt-4">
   <div class="row g-3">
     <div class="col-md-3">
@@ -15,7 +17,7 @@
       <div class="card text-white bg-success mb-3 dashboard-card">
         <div class="card-body">
           <h5 class="card-title">
-            <span><i class="fas fa-check-circle"></i></span> Approved Loans
+            <span><i class="fas fa-check-circle"></i></span> Active Loans
           </h5>
           <p class="card-text display-6">{{ activeCount }}</p>
         </div>
@@ -84,13 +86,13 @@
         <span
           class="badge"
           [ngClass]="{
-            'bg-success': loan.status === 'Approved',
-            'bg-warning': loan.status === 'Pending',
-            'bg-danger': loan.status === 'Rejected',
-            'bg-secondary': loan.status === 'Closed'
+            'bg-primary': getLoanStatuses(loan) === 'Active',
+            'bg-warning text-dark': getLoanStatuses(loan) === 'Rejected',
+            'bg-danger': getLoanStatuses(loan) === 'Overdue',
+            'bg-success': getLoanStatuses(loan) === 'Closed'
           }"
         >
-          {{ loan.status }}
+          {{ getLoanStatuses(loan) }}
         </span>
       </td>
     </tr>
