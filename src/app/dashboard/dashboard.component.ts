@@ -139,4 +139,7 @@ export class DashboardComponent {
   loan.emiDate=nextDate;
   loan.status=this.getLoanStatuses(loan);
   }
+  generateReceipt(){
+    this.pdfService.generatePaymentReceipt(this.loans,this.emiHistory,'Payment_Receipt');
+  }
 }

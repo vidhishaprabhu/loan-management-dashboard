@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Loan } from './dashboard-service.service';
+import { EmiHistory, Loan } from './dashboard-service.service';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { Customer } from './customer.service';
@@ -69,6 +69,27 @@ exportEmiScheduleToPDF(emiSchedule: any[], fileName: string) {
       emi.principalPaid,
       emi.interestPaid,
       emi.closingBalance
+    ]),
+    startY: 20
+  });
+
+  doc.setFontSize(16);
+  doc.text('Emi Schedule Report', 14, 15);
+
+  const date=new Date().getFullYear();
+  doc.save(`${fileName}_${date}.pdf`);
+}
+generatePaymentReceipt(loan:Loan[],emiHistory:EmiHistory[],fileName: string) {
+  const doc = new jsPDF();
+
+  autoTable(doc, {
+    head: [['Transaction ID', 'Payment Date', 'EMI','Outstanding Amount','Status']],
+    body: emiHistory.map(emihistory => [
+      emihistory.month,
+      new Date(emihistory.date).toLocaleDateString(),
+      emihistory.emiAmount,
+      emihistory.balance,
+      emihistory.status,
     ]),
     startY: 20
   });
