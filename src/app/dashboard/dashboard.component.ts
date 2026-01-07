@@ -142,4 +142,5 @@ export class DashboardComponent {
   generateReceipt(){
     this.pdfService.generatePaymentReceipt(this.loans,this.emiHistory,'Payment_Receipt');
   }
+  
 }
